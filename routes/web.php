@@ -35,3 +35,9 @@ Route::post('/photo/store/','PhotosController@store');
 Route::get('/photo/{id}','PhotosController@show');
 Route::Delete('/photo/{id}','PhotosController@destroy');
 
+
+// form route
+route::post('forms/{id}/update', 'FormController@update');
+route::get('forms/{id}/edit', 'FormController@edit');
+route::post('forms/store', 'FormController@store');
+Route::resource('forms','FormController');
