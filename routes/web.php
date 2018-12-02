@@ -37,6 +37,7 @@ Route::Delete('/photo/{id}','PhotosController@destroy');
 
 
 // form route
+route::delete('forms/{id}/destroy','FormController@destroy');
 route::post('forms/{id}/update', 'FormController@update');
 route::get('forms/{id}/edit', 'FormController@edit');
 route::post('forms/store', 'FormController@store');

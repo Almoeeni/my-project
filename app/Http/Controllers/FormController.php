@@ -111,6 +111,8 @@ class FormController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $form = form::find($id);
+        $form->delete();
+        return redirect('forms')->with('success','Coin has been  deleted');
     }
 }

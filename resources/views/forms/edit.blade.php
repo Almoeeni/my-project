@@ -21,8 +21,9 @@
           </ul>
       </div><br />
       @endif
+      
       <form method="post" action="{{action('FormController@update', $id)}}">
-        {{csrf_field()}}
+       @csrf
         <input name="_method" type="hidden" value="PATCH">
         <div class="row">
           <div class="col-md-4"></div>
