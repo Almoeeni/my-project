@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,7 +24,7 @@
           <p>{{ \Session::get('success') }}</p>
       </div><br />
       @endif
-      <form method="post" action="{{url('forms/store')}}">
+      <form method="post" action="{{url('/forms/store')}}">
       @csrf
         <div class="row">
           <div class="col-md-4"></div>

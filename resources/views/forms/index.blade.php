@@ -13,6 +13,7 @@
         <p>{{ \Session::get('success') }}</p>
       </div><br />
      @endif
+     <a href="/forms/create" class="btn btn-primary">Create</a>
     <table class="table table-striped">
     <thead>
       <tr>
@@ -42,6 +43,9 @@
       @endforeach
     </tbody>
   </table>
+  {{$forms->links()}} {{$forms->onFirstPage()}} 
+
   </div>
+
   </body>
 </html>

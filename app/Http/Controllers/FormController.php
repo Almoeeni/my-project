@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Form;
 class FormController extends Controller
@@ -13,7 +14,7 @@ class FormController extends Controller
      */
     public function index()
     {
-        $forms = Form::all()->toArray();
+        $forms = Form::paginate(3);
 
         return view('forms.index',compact('forms'));
     }
@@ -39,6 +40,7 @@ class FormController extends Controller
         $request->validate([
             'coinname' => 'required',
             'coinprice'=> 'required|numeric',
+           
           ]); 
           
           $form= new Form();
@@ -49,7 +51,7 @@ class FormController extends Controller
           $form->radio=$request->get('radio');
           $form->checkbox = $checkbox; 
           $form->save();
-          return redirect('forms/index')->with('success', 'Coin has been added');
+          return redirect('forms/')->with('success', 'Coin has been added');
     }
 
     /**
