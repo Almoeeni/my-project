@@ -42,3 +42,8 @@ route::post('forms/{id}/update', 'FormController@update');
 route::get('forms/{id}/edit', 'FormController@edit');
 route::post('forms/store', 'FormController@store');
 Route::resource('forms','FormController');
+
+//notification checkbox
+
+route::get('notification','NotificationController@index');
+route::post('notification','NotificationController@store');

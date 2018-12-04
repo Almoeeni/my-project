@@ -29,11 +29,11 @@
       <td>{{$form['id']}}</td>
         <td>{{$form['coinname']}}</td>
         <td>{{$form['coinprice']}}</td>
-        <td><a href="forms/{{$form['id']}}/edit" class="btn btn-warning">Edit</a></td>
+        <td><a href="/forms/{{$form['id']}}/edit" class="btn btn-warning">Edit</a></td>
         <td>
         
         
-        <form action="forms/{{$form['id']}}/destroy" method="post"> 
+        <form action="/forms/{{$form['id']}}/destroy" method="post"> 
             {{csrf_field()}}
             <input name="_method" type="hidden" value="DELETE">
             <button class="btn btn-danger" type="submit">Delete</button>
@@ -43,7 +43,7 @@
       @endforeach
     </tbody>
   </table>
-  {{$forms->links()}} {{$forms->onFirstPage()}} 
+  {{$forms->links()}} 
 
   </div>
 
