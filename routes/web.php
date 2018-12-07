@@ -47,3 +47,6 @@ Route::resource('forms','FormController');
 
 route::get('notification','NotificationController@index');
 route::post('notification','NotificationController@store');
+
+
+route::post('/listing/{listing}/comment', "CommentsController@store");

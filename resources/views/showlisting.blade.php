@@ -21,7 +21,43 @@
                 </div>
             </div>
         </div>
-        
+       
+          
     </div>
-    
+    <hr>
+    <div class="card" style="    width: 50%;
+    margin-left: 25ox;
+    height: 146px;
+    left: 188px;">
+            <div class="card-block" style="margin-left: 197px;
+    height: 55%;">
+              <div class="form-group">
+              <form method="Post" action="/listing/{{$listing->id}}/comment">
+              @csrf
+
+
+                <textarea name="body" class="form-control"  cols="30" rows="5" placeholder=" type your comments here"></textarea>
+
+          
+              <input type="submit" class="btn btn-primary" value="submit">
+              
+              </form>
+              
+              </div>
+            </div>
+            </div>
+
+            <hr>
+
+            <div class="card" style="    text-align: center;">
+            @foreach($listing->comment as $comments)
+             <div>
+                <li> {{$comments->body}} by {{$comments->user_id}}</li>   
+                <strong>{{$comments->created_at->diffForHumans()}}</strong> 
+
+             </div>
+
+                @endforeach
+
+            </div>
 @endsection
