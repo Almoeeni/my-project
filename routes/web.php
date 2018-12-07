@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/layouts', function () {
+    return view('layouts.master');
 });
 
 Auth::routes();
