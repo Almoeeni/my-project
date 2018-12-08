@@ -40,6 +40,7 @@ class FormController extends Controller
         $request->validate([
             'coinname' => 'required',
             'coinprice'=> 'required|numeric',
+            
            
           ]); 
           
