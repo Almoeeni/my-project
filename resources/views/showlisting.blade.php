@@ -36,7 +36,7 @@
               @csrf
 
 
-                <textarea name="body" class="form-control"  cols="30" rows="5" placeholder=" type your comments here"></textarea>
+                <textarea name="body" class="form-control"  cols="30" rows="5" placeholder=" type your comments here" required></textarea>
 
           
               <input type="submit" class="btn btn-primary" value="submit">
@@ -52,12 +52,12 @@
             <div class="card" style="    text-align: center;">
             @foreach($listing->comment as $comments)
              <div>
-                <li> {{$comments->body}} by {{$comments->user_id}}</li>   
+                <li> {{$comments->body}} by {{$comments->user->name}}</li>   
                 <strong>{{$comments->created_at->diffForHumans()}}</strong> 
 
              </div>
 
                 @endforeach
-
+              
             </div>
 @endsection
