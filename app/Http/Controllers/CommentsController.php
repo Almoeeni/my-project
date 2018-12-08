@@ -5,8 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Listing;
+use App\User;
+use App\Mail\Welcome;
 class CommentsController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +48,11 @@ class CommentsController extends Controller
             $comment->body = request('body');
             $comment->user_id = Auth()->user()->id;
             $comment->listing_id = $listing->id;
+          
+
+         
             $comment->save();
+            \Mail::to($listing->user->email)->send(new Welcome);
              return redirect()->back();
     }
 
