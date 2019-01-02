@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/layouts', function () {
+    return view('layouts.master');
 });
 
 Auth::routes();
@@ -50,3 +50,10 @@ route::post('notification','NotificationController@store');
 
 
 route::post('/listing/{listing}/comment', "CommentsController@store");
+
+
+
+
+route::get('/ajaxf' , 'AjaxController@create');
+route::post('/ajaxform' , 'AjaxController@store');
+route::resource('ajax' , 'AjaxController');

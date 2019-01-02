@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Listing;
 class ListingsController extends Controller
 {
@@ -74,8 +75,8 @@ class ListingsController extends Controller
     {
         
         $listing = Listing::findOrFail($id);
-
-      return view('showlisting',compact('listing'));
+        $comments = $listing->comment()->orderBy('id','desc')->paginate(5);
+      return view('showlisting',compact('listing','comments'));
         //->with('listing',$listings);
     }
 
@@ -131,4 +132,8 @@ class ListingsController extends Controller
         $listings->delete();
         return redirect('/home')->with('success','Data is deleted');
     }
+
+
+
+
 }

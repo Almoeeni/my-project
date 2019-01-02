@@ -50,14 +50,16 @@
             <hr>
 
             <div class="card" style="    text-align: center;">
-            @foreach($listing->comment as $comments)
+            @foreach($comments as $commen)
              <div>
-                <li> {{$comments->body}} by {{$comments->user->name}}</li>   
-                <strong>{{$comments->created_at->diffForHumans()}}</strong> 
+                <li> {{$commen->body}} by {{$commen->user->name}}</li>   
+                <strong>{{$commen->created_at->diffForHumans()}}</strong> 
 
              </div>
-
+             
                 @endforeach
+
+               {{$comments->links()}}
               
             </div>
 @endsection
