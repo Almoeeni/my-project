@@ -29,6 +29,11 @@ class AjaxController extends Controller
 
       if($validator->fails()){
         return response()->json(['error'=>$validator->errors()]);
+        // return response()->json(array(
+        //     'success' => false,
+        //     'errors' => $validator->errors()->all()
+    
+        // ));
   
     
       }
