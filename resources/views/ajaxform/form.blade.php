@@ -5,11 +5,16 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
 	<meta name="_token" content="{{csrf_token()}}" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.min.js"></script>
 </head>
 
 <style>
 .bcolor {
 	border: 1px solid green;
+}
+.help-block {
+	font-weight: 100;
 }
 </style>
 <body>
@@ -32,7 +37,7 @@
 
 
 
-	<form action="/ajaxform" method="post">
+	<form action="/ajaxform" method="post" id="myform">
 		{{ csrf_field() }}
 
 
@@ -77,19 +82,57 @@
 
 	$(document).ready(function() {
 		
-		$("#email").on('keypress',function()  {
-    if ($(this).val() != null) {
-      
-        $("input[type=email]").css('border','1px solid green');
-    } else  {
+		$.validator.setDefaults({
+			errorClass: 'help-block',
+			highlight: function(element){
+				$(element)
+				.closest('.form-group')
+				.removeClass('has-success')
+				.addClass('has-error');
+			},
+			unhighlight: function(element){
+				$(element)
+				.closest('.form-group')
+				.removeClass('has-error')
+				.addClass('has-success');
+			}
+		});
+		$.validator.addMethod('strongPassword', function(value , element){
 
-        $("input[type=email]").css('border','1px solid white');
-    }
-});
-		//$('.help-block').removeClass('hide');
-		// $('input').keypress(function(){
-		// 	$('input').css("border-color" ,"green");
-		// })
+				return this.optional(element)
+				|| value.length >=8
+				&& /\d/.test(value)
+				&& /[A-z]/i.test(value);
+				// && /^[a-zA-Z\s]+$/.test(value);
+		}, 'Your password must be at at least 8 characters long and contains at lest one number and one special char\'.');
+		
+		
+
+		var validator = $('#myform').validate({
+			rules: {
+				name: {
+					required : true,
+				
+
+					},
+				email: {
+					
+					email: true,
+
+				},
+				password: {
+					required : true,
+					minlength: 8,
+					strongPassword: true
+				
+				},
+				password_confirmation : {
+					equalTo : "#password"
+				}
+
+			}
+
+		});
 	
 	    $(".btn-submit").click(function(e){
 			
@@ -126,8 +169,7 @@
 					
 					
 					$.each( data.error, function( i, v ) {
-						console.log(i + " => " + v);
-						
+						console.log(i + " => " + v);						
 						var err = '<span id="helpBlock2" class="help-block" for="'+i+'">'+v+'</span>';  										
                         $('input[name="' + i + '"]').after(err).parent('div.start').addClass('has-error');
 						
