@@ -1,5 +1,5 @@
 <?php
-
+use App\AjaxCrud;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,7 +53,11 @@ route::post('/listing/{listing}/comment', "CommentsController@store");
 
 
 
+Route::get('/links/{link_id?}', function ($link_id) {
+    $link = AjaxCrud::find($link_id);
+    return Response::json($link);
+});
 
-route::get('/ajaxf' , 'AjaxController@create');
+route::post('/ajaxupdate/{link_id?}' , 'AjaxController@update');
 route::post('/ajaxform' , 'AjaxController@store');
 route::resource('ajax' , 'AjaxController');
