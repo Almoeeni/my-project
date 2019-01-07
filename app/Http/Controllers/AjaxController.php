@@ -8,7 +8,8 @@ class AjaxController extends Controller
 {
     public function index()
     {
-        return view('ajaxform.form');
+        $data = AjaxCrud::orderBy('id', 'DESC')->paginate(5);
+        return view('ajaxform.form', compact('data'));
     }
 
     public function create(){
@@ -17,10 +18,7 @@ class AjaxController extends Controller
 
     public function store(Request $request)
     {
-        // $input =$request->all();
-        // dd($input);
-
-        //$this->validate($request,[
+      
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|max:255|unique:users',
@@ -28,13 +26,7 @@ class AjaxController extends Controller
         ]);
 
       if($validator->fails()){
-        return response()->json(['error'=>$validator->errors()]);
-        // return response()->json(array(
-        //     'success' => false,
-        //     'errors' => $validator->errors()->all()
-    
-        // ));
-  
+        return response()->json(['error'=>$validator->errors()]); 
     
       }
       else{
@@ -49,5 +41,33 @@ class AjaxController extends Controller
              
        
       //  return redirect()->back();
+    }
+    public function edit($id)
+    {
+        //
+    }
+
+    public function update(Request $request , $link_id)
+    {
+    //         $validator = \Validator::make($request->all(), [
+    //         'name' => 'required',
+    //         'email' => 'required|email|max:255|unique:users',
+    //         // 'password' => 'required|min:8|confirmed|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/',
+    //     ]);
+
+    //   if($validator->fails()){
+    //     return response()->json(['error'=>$validator->errors()]); 
+    
+    //   }
+    //   else{
+     
+        $input = AjaxCrud::findOrFail($link_id);
+        
+        $input->name = $request->name;
+        $input->email = $request->email;
+        $input->save();
+        //return response()->json($input);
+        return response()->json(['success'=>'Added new records.']);    
+      //}
     }
 }
