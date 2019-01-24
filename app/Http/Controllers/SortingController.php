@@ -78,7 +78,7 @@ class SortingController extends Controller
          foreach($menu as $menus)
          {
             $id= $menus->id;
-            $menus->timestamps = false;
+          //  $menus->timestamps = false;
             foreach($request->order as $orders)
             {
                 //dd($id);

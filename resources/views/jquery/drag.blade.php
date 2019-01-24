@@ -42,10 +42,14 @@
                     order:order
                 },
                 beforeSend: function(){
+                    $("div").fadeOut();
                 $('.center').removeClass('hide');
+                $('.center').fadeIn();
+                
                     },
                 success: function(response) {
-                    $('.center').addClass('hide');
+                    $("div").fadeIn();
+                    $('.center').fadeOut('hide');
                   // $('.center').delay(1000).slideUp(400);
             if (response.status == "success") {
               
@@ -119,5 +123,6 @@ li::before {
 					</ul>
 					@endif
 					@endif
-                    <div class="center hide"><h1> <strong> Please Wait</strong></h1></div>
+                   
 				</div>
+                <span class="center hide"><h1> <strong> Please Wait</strong></h1></span>
