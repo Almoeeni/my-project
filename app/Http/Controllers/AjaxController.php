@@ -60,6 +60,13 @@ class AjaxController extends Controller
     
     //   }
     //   else{
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|max:255|unique:users',
+        ]);
+
+        if($validator->fails())
+
      
         $input = AjaxCrud::findOrFail($link_id);
         

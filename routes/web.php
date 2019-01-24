@@ -1,5 +1,7 @@
 <?php
 use App\AjaxCrud;
+use App\Sorting;
+use Illuminate\Support\Facades\Input;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,3 +63,23 @@ Route::get('/links/{link_id?}', function ($link_id) {
 route::post('/ajaxupdate/{link_id?}' , 'AjaxController@update');
 route::post('/ajaxform' , 'AjaxController@store');
 route::resource('ajax' , 'AjaxController');
+
+// sorting darg drop jquery ui
+route::get('/sorting' , 'SortingController@index');
+ //route::get('/sorting/menu' , 'SortingController@menu');
+ Route::get('/drag',function(){
+	$menu = Sorting::orderBy('sorting','ASC')->get();
+	return view('jquery.drag', compact('menu'));
+});
+//  Route::get('order-menu', function () {
+//      $menu = Sorting::OrderBy('sorting','ASC')->get();
+//      $itemID = input::get('itemID');
+//      $itemIndex = input::get('itemIndex');  
+
+//         foreach($menu as $value){
+//             return Sorting::where('id' ,'=',$itemID)->update(array('sorting' => $itemIndex));
+//         }
+//   //  return view('jquery.drag');
+// });
+
+route::get('order-menu', 'SortingController@update');
